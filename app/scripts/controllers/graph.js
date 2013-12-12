@@ -1,13 +1,16 @@
 'use strict';
 
 angular.module('southhighApp')
-  .controller('GraphCtrl', ['$scope', function ($scope) {
+  .controller('GraphCtrl', ['$scope', 'angularFire', function ($scope, angularFire) {
 
   	var deviceIndex = {
   			iPhone : 0,
   			Android: 1,
   			Other: 3
   		};
+
+  	var ref = new Firebase('https://southhigh.firebaseio.com/');
+  	angularFire(ref, $scope, 'graph');
 
     $scope.graph = {
     	nodes : [
@@ -22,8 +25,16 @@ angular.module('southhighApp')
     		{"name": "random", "belongsTo": "Android"},
     		{"name": "random", "belongsTo": "Other"},
     		{"name": "random", "belongsTo": "Other"}
-    	],
-    	links : [
     	]
+    };
+
+    $scope.reset = function() {
+    	$scope.graph = {
+    		nodes : [
+	    		{"name": "iPhone", "type": "device"},
+	    		{"name": "Android", "type": "device"},
+	    		{"name": "Other", "type": "device"}
+    		]
+    	};
     };
 }]);

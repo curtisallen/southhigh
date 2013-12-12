@@ -40,11 +40,19 @@
        ga('create', 'UA-XXXXX-X');
        ga('send', 'pageview');
     </script-->
-
+    <!-- String contatins polyfill -->
+    <script type="text/javascript">
+      if (!('contains' in String.prototype)) {
+        String.prototype.contains = function(str, startIndex) {
+          return ''.indexOf.call(this, str, startIndex) !== -1;
+        };
+      }
+    </script>
     <script src="bower_components/jquery/jquery.js"></script>
     <script src="bower_components/angular/angular.js"></script>
     <script src="//cdn.firebase.com/v0/firebase.js"></script>
-    <script src="bower_components/angular-fire/angularfire.js"></script>
+    <!--script src="bower_components/angular-fire/angularfire.js"></script-->
+    <script src="//cdn.firebase.com/libs/angularfire/0.3.0/angularfire.js"></script>
     <script src="bower_components/d3/d3.js"></script>
 
         <!-- build:js scripts/plugins.js -->
