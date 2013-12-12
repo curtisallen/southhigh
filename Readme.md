@@ -13,3 +13,4 @@ The [graph view](http://curtisallen.github.io/southhigh/#/graph) visulizes this 
 * [AngularJS](http://angularjs.org)
 * [D3](http://d3js.org)
 * [Firebase](http://www.firebase.com)
+* [Yeoman](http://yeoman.io/)
