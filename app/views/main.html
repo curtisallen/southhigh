@@ -1,0 +1,67 @@
+<div class="header">
+  <ul class="nav nav-pills pull-right">
+    <li class="active"><a ng-href="#">Home</a></li>
+    <li><a ng-href="#">About</a></li>
+    <li><a ng-href="#">Contact</a></li>
+  </ul>
+  <h3 class="text-muted">southhigh</h3>
+</div>
+
+<div class="jumbotron">
+  <h1>'Allo, 'Allo!</h1>
+  <p class="lead">
+    <img src="images/yeoman.png" alt="I'm Yeoman"><br>
+    Always a pleasure scaffolding your apps.
+  </p>
+  <p><a class="btn btn-lg btn-success" ng-href="#">Splendid!</a></p>
+</div>
+
+<div class="row marketing">
+  <h4>HTML5 Boilerplate</h4>
+  <p>
+    HTML5 Boilerplate is a professional front-end template for building fast, robust, and adaptable web apps or sites.
+  </p>
+
+  <h4>Angular</h4>
+  <p>
+    AngularJS is a toolset for building the framework most suited to your application development.
+  </p>
+
+  <h4>Karma</h4>
+  <p>Spectacular Test Runner for JavaScript.</p>
+</div>
+
+<div class="footer">
+  <p>♥ from the Yeoman team</p>
+</div>
+
+<div class="well" ng-app="chat" ng-controller="Chat">
+  <form class="form-inline">
+    Your name: <input type="text" ng-model="username">
+  </form>
+  <div ng-cloak ng-repeat="message in messages">
+    <em>{{message.from}}: </em>{{message.content}}
+  </div><br/>
+  <form class="form-inline" ng-submit="addMessage()">
+    <input type="text" ng-model="message" placeholder="Message...">
+    <button class="btn" type="submit">
+      <i class="icon-reply"> Send</i>
+    </button>
+  </form>
+</div>
+<script src="//cdnjs.cloudflare.com/ajax/libs/angular.js/1.1.5/angular.min.js"></script>
+<script src="//cdn.firebase.com/v0/firebase.js"></script>
+<script src="//cdn.firebase.com/libs/angularfire/0.3.0/angularfire.min.js"></script>
+<script type="text/javascript">
+  angular.module('chat', ['firebase']).controller('Chat', ['$scope', 'angularFire',
+    function($scope, angularFire) {
+      var ref = new Firebase('https://angularfire.firebaseio.com/chat');
+      angularFire(ref.limit(15), $scope, "messages");
+      $scope.username = 'Guest' + Math.floor(Math.random()*101);
+      $scope.addMessage = function() {
+        $scope.messages[ref.push().name()] = {
+          from: $scope.username, content: $scope.message
+        };
+        $scope.message = "";
+      }}]);
+</script>
